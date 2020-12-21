@@ -3,57 +3,35 @@ import numpy.random
 import random
 
 
-def random_graph(nodes,edges):
-
-    nums = []
-    total = edges
-    #print('total is:' + total)
-    temp = []
-    for i in range(nodes-1):
-        val = np.random.randint(0, (nodes-1))
-        #print('val:')
-        #print(val)
-        temp.append(val)
-        total -= val
-    temp.append(total)
-    nums.append(temp)
-    nums1 = nums[0]
-
-    return nums1
-
-#random.sample(range(100), 10)
-
-
 #main code
 input_a = input("How many nodes?")
 nodes = int(input_a)
 input_b = input("How many edges?")
 edges = int(input_b)
 f = open("writescc.txt.txt", "w+")
-nums = random_graph(nodes,edges)
-print(nums)
-
+graph = {}
+graph = dict()
 for i in range(nodes):
-    #print("nums[i] is:")
-    #print(nums[i])
-    counter = nums[i]
-    node1 = i + 1
-    if counter != 0:
-        for y in range(counter):
-            node2 = node1
-            #while node2 is node1:
-            r = random.sample(range(nodes), counter)
-            print(r)
-                #for z in r:
-                    #while r[z] == node1:
-                        #r[z] = random.randint(1, nodes)
-                #node2 = random.randint(1, nodes)
-            b = str(node2)
-            a = str(node1)
-            print("node1 is:")
-            print(node1)
-            print("node2 is:")
-            print(node2)
-            f.write(a + ' ' + b + '\n')
+    graph[i+1] = []
+print(graph)
 
+for i in range(edges):
+    # generate 2 random nodes and write to file
+    node1 = random.randrange(1, nodes+1)
+    print(node1)
+    node2 = random.randrange(1, nodes+1)
+    while node1 == node2:  # self loop check
+        node2 = random.randrange(1, nodes)
+    print(node2)
+    # for value in graph[node]:
+    no2 = str(node2)
+    values1 = graph.get(node1)
 
+    if node2 not in values1:
+        print("entered")
+        graph[node1].append(node2)
+        print("dict is:")
+        print(graph)
+    else:
+        print("else")
+        i = i + 1
